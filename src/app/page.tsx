@@ -1285,7 +1285,7 @@ export default function Home() {
                     </span>
                   ))}
                 </div>
-                <p className="text-gray-700 mb-6 italic">"{testimonial.quote}"</p>
+              <p className="text-gray-700 mb-6 italic">&quot;{testimonial.quote}&quot;</p>
                 <div className="flex items-center">
                   <div className="mr-4 rounded-full overflow-hidden h-12 w-12 relative">
                     <Image

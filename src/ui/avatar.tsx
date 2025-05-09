@@ -1,30 +1,26 @@
 import React from "react";
 import Image from "next/image";
 
-interface AvatarProps extends React.HTMLAttributes<HTMLDivElement> {
-  src?: string;
+interface AvatarProps {
+  src: string;
   alt?: string;
+  size?: number; // optional prop for controlling size
 }
 
-export const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(
-  ({ className = "", src, alt = "", children, ...props }, ref) => {
-    return (
-      <div
-        ref={ref}
-        className={`relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full ${className}`}
-        {...props}
-      >
-        {children}
-      </div>
-    );
-  }
-);
-
-// Using the Avatar component
-function MyComponent() {
+const Avatar: React.FC<AvatarProps> = ({ src, alt = "Avatar", size = 40 }) => {
   return (
-    <div>
-      <Avatar src="image.jpg" alt="Avatar Image" />
+    <div className="rounded-full overflow-hidden" style={{ width: size, height: size }}>
+      <Image
+        src={src}
+        alt={alt}
+        width={size}
+        height={size}
+        className="object-cover w-full h-full"
+      />
     </div>
   );
-}
+};
+
+Avatar.displayName = "Avatar";
+
+export default Avatar;
