@@ -1,7 +1,11 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 
-const Button = React.forwardRef<HTMLButtonElement, React.ButtonHTMLAttributes<HTMLButtonElement>>(
+export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  customStyle?: string; // Example custom property
+}
+
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, ...props }, ref) => {
     return (
       <button

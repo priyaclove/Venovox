@@ -1,0 +1,144 @@
+{
+  "academyPrograms": [
+    {
+      "id": 1,
+      "title": "Security Management Training",
+      "description": "Security Management Training equips individuals with the necessary knowledge and skills to proficiently oversee security operations. These training programs encompass a wide range of subjects, including risk assessment, security policies and protocols, physical security, access control, and incident response.",
+      "icon": "shield-lock",
+      "color": "red"
+    },
+    {
+      "id": 2,
+      "title": "Business Intelligence and Analytics",
+      "description": "Business Intelligence and Analytics involves the exploration of techniques and tools used to gather information, organize data, and interpret it in order to facilitate business decision-making. This program enables trainees to discover fresh insights through data visualization, optimize the business impact of social media data, and seamlessly incorporate analytics into marketing strategies to enhance customer value.",
+      "icon": "bar-chart",
+      "color": "black"
+    },
+    {
+      "id": 3,
+      "title": "Executive Protection",
+      "description": "Executive protection entails security measures implemented to safeguard VIPs, celebrities, executives, or individuals who face heightened personal risks due to factors such as their occupation, fame, wealth, affiliations, or geographic location. Executive protection constitutes a specialized domain within the private security sector, originating in the 1970s when the US Secret Service provided protection to foreign dignitaries.",
+      "icon": "user-shield",
+      "color": "gray"
+    },
+    {
+      "id": 4,
+      "title": "Emergency Response Planning / Management",
+      "description": "Unforeseen emergencies and disasters can arise unexpectedly at any given moment. The level of preparedness exhibited by a corporation directly influences their ability to respond effectively, reducing panic and disorder in emergency situations. This program equips Emergency Response Team (ERT) members with the skills to effectively manage diverse emergencies through the creation of an Emergency Response Plan (ERP), comprehensive comprehension of Emergency Procedures, and proficient execution of the Incident Command System (ICS) during times of disaster.",
+      "icon": "alert-triangle",
+      "color": "red"
+    },
+    {
+      "id": 5,
+      "title": "Effective Security Officer Training",
+      "description": "The training for Security Officers focuses on equipping them with the essential skills and knowledge necessary to fulfill their roles professionally and efficiently. Despite being a crucial element in developing professional security officers, training is frequently disregarded or not fully utilized. It is imperative for officers to confront the challenges posed by advancing technology and prioritize proactive measures and vigilance.",
+      "icon": "user-check",
+      "color": "black"
+    },
+    {
+      "id": 6,
+      "title": "Cybersecurity Fundamentals",
+      "description": "Our Cybersecurity Fundamentals program provides comprehensive training on protecting digital assets from threats and vulnerabilities. Participants learn about network security, encryption techniques, secure coding practices, and threat detection methods to safeguard critical information systems.",
+      "icon": "lock",
+      "color": "gray"
+    },
+    {
+      "id": 7,
+      "title": "Crisis Management",
+      "description": "Crisis Management training prepares professionals to handle high-pressure situations with confidence and strategic thinking. Participants develop skills in rapid assessment, decision-making under pressure, stakeholder communication, and implementing effective response strategies during critical incidents.",
+      "icon": "alert-octagon",
+      "color": "red"
+    },
+    {
+      "id": 8,
+      "title": "Risk Assessment & Mitigation",
+      "description": "Our Risk Assessment program teaches methodologies for identifying, analyzing, and evaluating security threats to organizations. Participants learn systematic approaches to risk management, vulnerability assessment techniques, and implementation of cost-effective countermeasures.",
+      "icon": "shield",
+      "color": "black"
+    },
+    {
+      "id": 9,
+      "title": "Advanced Surveillance Techniques",
+      "description": "This program covers modern surveillance methodologies and technologies used in security operations. Participants gain expertise in physical surveillance, counter-surveillance, technical surveillance equipment, and legal considerations related to monitoring activities.",
+      "icon": "eye",
+      "color": "gray"
+    },
+    {
+      "id": 10,
+      "title": "Corporate Security Leadership",
+      "description": "Designed for security professionals advancing to leadership roles, this program develops management skills specific to security operations. Focus areas include security team leadership, budget management, strategic security planning, and integration with overall business objectives.",
+      "icon": "users",
+      "color": "red"
+    },
+    {
+      "id": 11,
+      "title": "Transport Security Management",
+      "description": "This specialized program addresses security challenges in the transportation sector. Content covers supply chain security, cargo protection, route risk assessment, vehicle security measures, and collaboration with law enforcement agencies during transit operations.",
+      "icon": "truck",
+      "color": "black"
+    },
+    {
+      "id": 12,
+      "title": "Threat Intelligence Analysis",
+      "description": "Our Threat Intelligence program develops analytical skills needed to identify and assess emerging security threats. Participants learn methodologies for gathering intelligence, analyzing threat data, producing actionable reports, and implementing preemptive security measures.",
+      "icon": "search",
+      "color": "gray"
+    },
+    {
+      "id": 13,
+      "title": "Event Security Planning",
+      "description": "This comprehensive program covers all aspects of securing public and private events. Topics include crowd management, access control systems, emergency evacuation procedures, VIP protection, and coordination with emergency services during large gatherings.",
+      "icon": "calendar",
+      "color": "red"
+    },
+    {
+      "id": 14,
+      "title": "Security Technology Integration",
+      "description": "This technical program focuses on implementing and managing modern security technologies. Participants learn about integrated security systems, CCTV deployment, access control technologies, alarm systems, and emerging technologies in the security field.",
+      "icon": "cpu",
+      "color": "black"
+    },
+    {
+      "id": 15,
+      "title": "Tactical Communication",
+      "description": "Our Tactical Communication course develops verbal and non-verbal skills for security professionals. The program covers de-escalation techniques, crisis communication, intercultural communication competencies, and effective reporting procedures in security operations.",
+      "icon": "message-circle",
+      "color": "gray"
+    },
+    {
+      "id": 16,
+      "title": "Aviation Security Management",
+      "description": "This specialized program addresses the unique security challenges of the aviation industry. Content includes airport security protocols, passenger screening methods, baggage security measures, and international aviation security standards and regulations.",
+      "icon": "plane",
+      "color": "red"
+    },
+    {
+      "id": 17,
+      "title": "Retail Loss Prevention",
+      "description": "Our Retail Loss Prevention program addresses security challenges specific to retail environments. Participants learn strategies to prevent theft, fraud detection techniques, inventory security, cash handling procedures, and employee security awareness training.",
+      "icon": "shopping-bag",
+      "color": "black"
+    },
+    {
+      "id": 18,
+      "title": "Hospitality Security Operations",
+      "description": "This program covers security management specific to hotels, resorts, and entertainment venues. Topics include guest safety protocols, room security systems, food and beverage security, special event management, and maintaining security while enhancing guest experience.",
+      "icon": "home",
+      "color": "gray"
+    },
+    {
+      "id": 19, 
+      "title": "Maritime Security Management",
+      "description": "Our Maritime Security program focuses on protecting vessels, ports, and maritime facilities. Content includes ISPS Code compliance, vessel security plans, port facility security, piracy countermeasures, and coordination with coastal authorities.",
+      "icon": "anchor",
+      "color": "red"
+    },
+    {
+      "id": 20,
+      "title": "Security Audit & Compliance",
+      "description": "This program develops skills needed to conduct thorough security audits and ensure regulatory compliance. Participants learn audit methodologies, compliance frameworks, documentation practices, corrective action procedures, and ongoing security improvement processes.",
+      "icon": "clipboard",
+      "color": "black"
+    }
+  ]
+}
