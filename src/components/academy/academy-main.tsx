@@ -6,8 +6,7 @@ import {
   Shield, 
   TriangleAlert, 
   Settings, 
-  UserCheck,
-  TrendingUp 
+  UserCheck, 
 } from 'lucide-react';
 
 export default function TrainingPage() {
@@ -87,7 +86,7 @@ export default function TrainingPage() {
           <div className="flex flex-col md:flex-row-reverse gap-8 items-center bg-gray-100 p-8 rounded-lg">
             <div className="w-full md:w-7/10 p-6">
               <p className="text-gray-800 leading-relaxed">
-                Tomorrow's security leaders, our Security Management Training
+                Tomorrow&lsquo;s security leaders, our Security Management Training
                 program equips participants with comprehensive knowledge of
                 security operations, risk assessment, and crisis management.
               </p>

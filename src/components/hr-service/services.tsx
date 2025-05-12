@@ -1,7 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import { 
-  Users, Search, Shield, FileText, 
+  Users, Search, Shield, 
   BarChart, Brain, Handshake, Mail,
   Globe, Briefcase, BookOpen, ChevronRight
 } from "lucide-react";
@@ -26,7 +26,7 @@ export default function HRServicesPage() {
             transition={{ delay: 0.3, duration: 0.6 }}
             className="text-xl max-w-3xl mb-8"
           >
-            A strong focus on workforce talent shapes both existing and potential employees' 
+            A strong focus on workforce talent shapes both existing and potential employees`&lsquo;` 
             relationship with the organization, directly impacting business success.
           </motion.p>
           <motion.div
@@ -207,7 +207,7 @@ export default function HRServicesPage() {
           processes, and systems to become more adaptable and efficient.
         </p>
         <p className="text-gray-600">
-          We enhance the organization's ability to adapt to market changes, encourage 
+          We enhance the organization&lsquo;s ability to adapt to market changes, encourage 
           employee engagement, and increase competitiveness through strategic change.
         </p>
       </div>

@@ -1,7 +1,7 @@
 "use client"
 
 import type React from "react"
-
+import Image from 'next/image';
 import { useEffect, useRef } from "react"
 import { motion, useInView, useAnimation, type Variants } from "framer-motion"
 import { Briefcase, Users, CheckCircle, BarChart } from "lucide-react";
@@ -46,8 +46,15 @@ export default function TalentAcquisitionPage() {
         <div className="max-w-6xl mx-auto py-20 px-4">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <motion.div variants={slideLeftVariants} className="order-2 md:order-1">
-              <img src="/talent-main.jpg" alt="Talent Acquisition" className="w-full h-auto" />
-            </motion.div>
+<Image
+  src="/talent-main.jpg"
+  alt="Talent Acquisition"
+  width={1200}       // Set your desired width (required)
+  height={800}      // Set your desired height (required)
+  className="w-full h-auto"
+  priority={true}   // If this is a large hero image
+  quality={85}      // Optional: reduces file size (default: 75)
+/>            </motion.div>
             <motion.div variants={slideLeftVariants} className="order-1 md:order-2">
               <h3 className="text-2xl font-bold mb-6">Empower your business with end-to-end recruitment support tailored for growth.</h3>
               <p className="text-gray-700 mb-6">
@@ -156,7 +163,7 @@ Attract, engage, and retain the best minds in your industry.
               <h3 className="text-2xl font-bold mb-6">Data-Driven Talent Acquisition</h3>
               <p className="text-gray-700 mb-6">
                 Our approach combines industry expertise with advanced analytics to identify the best talent for your
-                specific needs. We don't just fill positions—we build strategic workforce solutions.
+                specific needs. We don`&lsquo;`t just fill positions—we build strategic workforce solutions.
               </p>
               <ul className="space-y-3">
                 {[
@@ -286,7 +293,7 @@ Attract, engage, and retain the best minds in your industry.
                 need but also align with your company culture and values.
               </p>
               <p className="text-gray-700">
-                We take the time to understand your organization's unique needs and culture, ensuring that we find
+                We take the time to understand your organization`&lsquo;`s unique needs and culture, ensuring that we find
                 candidates who will thrive in your environment and contribute to your long-term success.
               </p>
             </motion.div>
@@ -361,7 +368,7 @@ Attract, engage, and retain the best minds in your industry.
             Ready to Transform Your <span className="text-red-600">Workforce</span>?
           </motion.h2>
           <motion.p variants={fadeInVariants} className="text-xl md:text-2xl mb-10 text-gray-300">
-            Let's collaborate to create powerful, people-first solutions for your business.
+            Let`&lsquo;`s collaborate to create powerful, people-first solutions for your business.
           </motion.p>
           <motion.div variants={fadeInVariants} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
             <button className="bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-md font-medium text-lg transition-colors duration-300">
@@ -414,7 +421,6 @@ const flipVariants: Variants = {
 // Reusable animated section component
 function AnimatedSection({
   children,
-  animation = "fadeIn",
   className = "",
 }: {
   children: React.ReactNode
@@ -431,20 +437,6 @@ function AnimatedSection({
     }
   }, [isInView, controls])
 
-  const getVariants = () => {
-    switch (animation) {
-      case "fadeIn":
-        return fadeInVariants
-      case "slideLeft":
-        return slideLeftVariants
-      case "slideRight":
-        return slideRightVariants
-      case "flip":
-        return flipVariants
-      default:
-        return fadeInVariants
-    }
-  }
 
   return (
     <section ref={ref} className={className}>

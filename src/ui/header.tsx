@@ -3,8 +3,9 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useAnimation } from "framer-motion";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
+import Image from 'next/image';
 
-// The navbar data stored in a JSON-like structure
 const navData = {
   logo: "/logo.png",
   menuItems: [
@@ -22,18 +23,16 @@ const navData = {
 
 export default function Navbar() {
   const pathname = usePathname();
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [, setIsScrolled] = useState(false); // Fixed destructuring
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const controls = useAnimation();
   const navRef = useRef(null);
 
-  // Check if current route matches nav item
   const isActive = (path: string) => {
     return pathname === path || 
            (path !== '/' && pathname.startsWith(path));
   };
 
-  // Handle scroll effect with animation
   useEffect(() => {
     const handleScroll = () => {
       const scrolled = window.scrollY > 10;
@@ -56,25 +55,19 @@ export default function Navbar() {
     
     handleScroll();
     window.addEventListener("scroll", handleScroll);
-    
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, [controls]);
 
-  // Close mobile menu on resize
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth > 1024 && isMenuOpen) {
         setIsMenuOpen(false);
       }
     };
-
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, [isMenuOpen]);
 
-  // Prevent body scroll when mobile menu is open
   useEffect(() => {
     if (isMenuOpen) {
       document.body.style.overflow = "hidden";
@@ -86,7 +79,6 @@ export default function Navbar() {
     };
   }, [isMenuOpen]);
 
-  // Animation variants for menu items
   const menuItemVariants = {
     hidden: { opacity: 0, y: -10 },
     visible: (i: number) => ({
@@ -100,7 +92,6 @@ export default function Navbar() {
     })
   };
 
-  // Logo animation variants
   const logoVariants = {
     initial: { opacity: 0, x: -20 },
     animate: { 
@@ -132,15 +123,18 @@ export default function Navbar() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <a href="/" className="flex items-center">
+            <Link href="/" className="flex items-center">
               <div className="h-16 w-16 relative logo-hover">
-                <img 
-                  src="/logo.png" 
-                  alt="Venovox Logo" 
+                <Image
+                  src={navData.logo}
+                  alt="Venovox Logo"
+                  width={64}
+                  height={64}
                   className="object-contain w-full h-full"
+                  priority
                 />
               </div>
-            </a>
+            </Link>
           </motion.div>
 
           {/* Desktop Navigation */}
@@ -157,15 +151,13 @@ export default function Navbar() {
                     variants={menuItemVariants}
                     className="relative"
                   >
-                    <motion.a
+                    <Link
                       href={item.path}
                       className={`px-3 py-2 text-base font-medium rounded-md transition-colors duration-200 nav-item ${
                         active 
                           ? "text-red-600 font-semibold active" 
                           : "text-gray-700 hover:text-red-600"
                       }`}
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
                     >
                       {item.name}
                       {active && (
@@ -177,7 +169,7 @@ export default function Navbar() {
                           transition={{ duration: 0.4, ease: "easeOut" }}
                         />
                       )}
-                    </motion.a>
+                    </Link>
                   </motion.div>
                 );
               })}
@@ -255,15 +247,13 @@ export default function Navbar() {
                       transition: { duration: 0.2 }
                     }}
                   >
-                    <motion.a
+                    <Link
                       href={item.path}
                       className={`flex items-center justify-between px-4 py-3 rounded-lg text-base font-medium ${
                         active
                           ? "text-red-600 bg-red-50 shadow-sm"
                           : "text-gray-700 hover:bg-gray-50 hover:text-red-600"
                       }`}
-                      whileHover={{ x: 5 }}
-                      whileTap={{ scale: 0.98 }}
                     >
                       <span>{item.name}</span>
                       {active && (
@@ -275,7 +265,7 @@ export default function Navbar() {
                           <ChevronDown size={16} className="text-red-600" />
                         </motion.div>
                       )}
-                    </motion.a>
+                    </Link>
                   </motion.div>
                 );
               })}
