@@ -1,23 +1,71 @@
 "use client";
+import { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence, useAnimation } from "framer-motion";
+import { Menu, X, ChevronDown } from "lucide-react";
+import { usePathname } from "next/navigation";
 
-import { useState, useEffect } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+// The navbar data stored in a JSON-like structure
+const navData = {
+  logo: "/logo.png",
+  menuItems: [
+    { name: "Home", path: "/" },
+    { name: "About Us", path: "/about" },
+    { name: "HR Services", path: "/hr-services" },
+    { name: "Intelligence", path: "/intelligence" },
+    { name: "Payroll", path: "/payroll" },
+    { name: "Talent Acquisition", path: "/talent-acquisition" },
+    { name: "Academy", path: "/academy" },
+    { name: "Publication", path: "/publication" },
+    { name: "Contact Us", path: "/contact-us" },
+  ]
+};
 
 export default function Navbar() {
+  const pathname = usePathname();
+  const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const controls = useAnimation();
+  const navRef = useRef(null);
 
-  // Scroll-based animations
-  const { scrollY } = useScroll();
-  const headerBg = useTransform(scrollY, [0, 100], ["rgba(255, 255, 255, 0)", "rgba(255, 255, 255, 1)"]);
-  const headerShadow = useTransform(scrollY, [0, 100], ["0 0 0 rgba(0, 0, 0, 0)", "0 4px 20px rgba(0, 0, 0, 0.1)"]);
+  // Check if current route matches nav item
+  const isActive = (path: string) => {
+    return pathname === path || 
+           (path !== '/' && pathname.startsWith(path));
+  };
+
+  // Handle scroll effect with animation
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrolled = window.scrollY > 10;
+      setIsScrolled(scrolled);
+      
+      if (scrolled) {
+        controls.start({
+          height: "70px",
+          backgroundColor: "rgba(255, 255, 255, 0.95)",
+          boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)"
+        });
+      } else {
+        controls.start({
+          height: "90px",
+          backgroundColor: "rgba(255, 255, 255, 0.98)",
+          boxShadow: "none"
+        });
+      }
+    };
+    
+    handleScroll();
+    window.addEventListener("scroll", handleScroll);
+    
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [controls]);
 
   // Close mobile menu on resize
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth > 768 && isMenuOpen) {
+      if (window.innerWidth > 1024 && isMenuOpen) {
         setIsMenuOpen(false);
       }
     };
@@ -28,65 +76,210 @@ export default function Navbar() {
 
   // Prevent body scroll when mobile menu is open
   useEffect(() => {
-    document.body.style.overflow = isMenuOpen ? "hidden" : "unset";
+    if (isMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
     return () => {
       document.body.style.overflow = "unset";
     };
   }, [isMenuOpen]);
 
-  const menuItems = [
-    { name: "Home", path: "/" },
-    { name: "About Us", path: "/about" },
-    { name: "HR Services", path: "/hr-services" },
-    { name: "Intelligence", path: "/intelligence" },
-    { name: "Payroll", path: "/payroll" },
-    { name: "Talent Acquisition", path: "/talent-acquisition" },
-    { name: "Academy", path: "/academy" },
-    { name: "Publication", path: "/publication" },
-    { name: "Contact Us", path: "/contact-us" },
-  ];
+  // Animation variants for menu items
+  const menuItemVariants = {
+    hidden: { opacity: 0, y: -10 },
+    visible: (i: number) => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        delay: i * 0.1,
+        duration: 0.5,
+        ease: "easeOut"
+      }
+    })
+  };
+
+  // Logo animation variants
+  const logoVariants = {
+    initial: { opacity: 0, x: -20 },
+    animate: { 
+      opacity: 1, 
+      x: 0,
+      transition: { 
+        duration: 0.6,
+        ease: "easeOut" 
+      }
+    }
+  };
 
   return (
-    <motion.header
-      className="fixed top-0 left-0 right-0 z-50 px-6 md:px-12 flex items-center justify-between bg-white shadow-md"
-      style={{ backgroundColor: headerBg, boxShadow: headerShadow }}
+    <motion.header 
+      ref={navRef}
+      className="fixed top-0 left-0 w-full z-50 backdrop-blur-sm"
+      initial={{ height: "90px", backgroundColor: "rgba(255, 255, 255, 0.98)" }}
+      animate={controls}
+      transition={{ duration: 0.3, ease: "easeInOut" }}
     >
-      <Link href="/" className="flex items-center">
-        <Image src="/logo.png" alt="Venovox Logo" width={100} height={20} priority />
-      </Link>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center">
+          {/* Logo */}
+          <motion.div 
+            className="flex-shrink-0 flex items-center"
+            initial="initial"
+            animate="animate"
+            variants={logoVariants}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <a href="/" className="flex items-center">
+              <div className="h-16 w-16 relative logo-hover">
+                <img 
+                  src="/logo.png" 
+                  alt="Venovox Logo" 
+                  className="object-contain w-full h-full"
+                />
+              </div>
+            </a>
+          </motion.div>
 
-      {/* Desktop Navbar */}
-      <nav className="hidden md:flex items-center space-x-6">
-        {menuItems.map((item) => (
-          <Link key={item.name} href={item.path} className="text-gray-700 hover:text-red-700 text-lg font-medium">
-            {item.name}
-          </Link>
-        ))}
-      </nav>
+          {/* Desktop Navigation */}
+          <nav className="hidden lg:flex space-x-1 items-center">
+            <AnimatePresence>
+              {navData.menuItems.map((item, i) => {
+                const active = isActive(item.path);
+                return (
+                  <motion.div
+                    key={item.name}
+                    custom={i}
+                    initial="hidden"
+                    animate="visible"
+                    variants={menuItemVariants}
+                    className="relative"
+                  >
+                    <motion.a
+                      href={item.path}
+                      className={`px-3 py-2 text-base font-medium rounded-md transition-colors duration-200 nav-item ${
+                        active 
+                          ? "text-red-600 font-semibold active" 
+                          : "text-gray-700 hover:text-red-600"
+                      }`}
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      {item.name}
+                      {active && (
+                        <motion.div
+                          className="absolute bottom-0 left-0 h-0.5 bg-red-600 w-full"
+                          layoutId="navbar-underline"
+                          initial={{ opacity: 0, width: "0%" }}
+                          animate={{ opacity: 1, width: "100%" }}
+                          transition={{ duration: 0.4, ease: "easeOut" }}
+                        />
+                      )}
+                    </motion.a>
+                  </motion.div>
+                );
+              })}
+            </AnimatePresence>
+          </nav>
 
-      {/* Mobile Menu Button */}
-      <button className="md:hidden text-gray-700" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-        {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-      </button>
+          {/* Mobile menu button */}
+          <div className="flex lg:hidden">
+            <motion.button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className={`inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-red-600 focus:outline-none ${isMenuOpen ? 'hamburger-active' : ''}`}
+              aria-expanded={isMenuOpen}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <span className="sr-only">Open main menu</span>
+              <AnimatePresence mode="wait">
+                {isMenuOpen ? (
+                  <motion.div
+                    key="close"
+                    initial={{ rotate: 0, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: -90, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <X className="block h-6 w-6" aria-hidden="true" />
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="menu"
+                    initial={{ rotate: 0, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: 90, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <Menu className="block h-6 w-6" aria-hidden="true" />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.button>
+          </div>
+        </div>
+      </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile menu */}
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
-            initial={{ x: "100%" }}
-            animate={{ x: 0 }}
-            exit={{ x: "100%" }}
-            transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            className="fixed inset-0 z-40 bg-white pt-20 px-6 md:hidden"
-            role="dialog"
+            className="lg:hidden bg-white shadow-lg border-t border-gray-100 mobile-menu"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.4, ease: "easeInOut" }}
           >
-            <nav className="flex flex-col space-y-6 py-8">
-              {menuItems.map((item) => (
-                <Link key={item.name} href={item.path} className="text-gray-800 hover:text-red-700 text-lg font-medium" onClick={() => setIsMenuOpen(false)}>
-                  {item.name}
-                </Link>
-              ))}
-            </nav>
+            <motion.div 
+              className="px-4 pt-2 pb-4 space-y-2 sm:px-6"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.1, duration: 0.3 }}
+            >
+              {navData.menuItems.map((item, i) => {
+                const active = isActive(item.path);
+                return (
+                  <motion.div
+                    key={item.name}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ 
+                      opacity: 1, 
+                      x: 0,
+                      transition: { delay: i * 0.05, duration: 0.4, ease: "easeOut" }
+                    }}
+                    exit={{ 
+                      opacity: 0,
+                      x: -20,
+                      transition: { duration: 0.2 }
+                    }}
+                  >
+                    <motion.a
+                      href={item.path}
+                      className={`flex items-center justify-between px-4 py-3 rounded-lg text-base font-medium ${
+                        active
+                          ? "text-red-600 bg-red-50 shadow-sm"
+                          : "text-gray-700 hover:bg-gray-50 hover:text-red-600"
+                      }`}
+                      whileHover={{ x: 5 }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      <span>{item.name}</span>
+                      {active && (
+                        <motion.div
+                          initial={{ scale: 0 }}
+                          animate={{ scale: 1 }}
+                          transition={{ delay: i * 0.05 + 0.2, type: "spring", stiffness: 400, damping: 10 }}
+                        >
+                          <ChevronDown size={16} className="text-red-600" />
+                        </motion.div>
+                      )}
+                    </motion.a>
+                  </motion.div>
+                );
+              })}
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
